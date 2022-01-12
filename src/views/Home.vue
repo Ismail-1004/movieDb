@@ -49,27 +49,6 @@
         </div>
       </div>
     </section>
-    <div class="main__movies-selectors" v-show="showPagination">
-      <div class="container">
-        <ul class="main__movies-list">
-          <li class="main__movies-tab">
-            <router-link to="/" class="main__movies-link"> 1 </router-link>
-          </li>
-          <li class="main__movies-tab">
-            <router-link to="/" class="main__movies-link"> 2 </router-link>
-          </li>
-          <li class="main__movies-tab">
-            <router-link to="/" class="main__movies-link"> 3 </router-link>
-          </li>
-          <li class="main__movies-tab">
-            <router-link to="/" class="main__movies-link"> 4 </router-link>
-          </li>
-          <li class="main__movies-tab">
-            <router-link to="/" class="main__movies-link"> 5 </router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
     <div class="main__arrow" :class="{ active__arrow: showUp}" @click="scrollUp" >
       <i class="fas fa-chevron-up"></i>
     </div>
@@ -84,7 +63,6 @@ export default {
       arraOfFilms: [],
       showPreloader: true,
       page: 1,
-      showPagination: false,
       showUp: true,
       search: "",
       noMovies: false,
@@ -112,7 +90,7 @@ export default {
   computed: {
     filterMovies () {
       return this.arraOfFilms.filter(movie => {
-          return (movie.title.toLowerCase().indexOf(this.search) !== -1)
+        return (movie.title.toLowerCase().indexOf(this.search) !== -1)
       })
     }
   },

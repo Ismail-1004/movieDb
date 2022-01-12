@@ -27,6 +27,7 @@
         justify-content: center;
         border-radius: 50%;
         transition: .3s;
+        margin: 20px;
         &:hover {
             background: white;
             color: black;
@@ -78,10 +79,76 @@
             color: white;
             cursor: pointer;
             transition: .3s;
-            margin-right: 20px;
             &:hover {
                 color: rgb(201, 146, 46);
             }
+        }
+        &-menu {
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            transition: .3s;
+            &:hover {
+                color: rgb(201, 146, 46);
+            }
+        }
+    }
+    &__side {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 300px;
+        background: rgba(0, 0, 0, 0.734);
+        backdrop-filter: blur(15px);
+        z-index: 99999;
+        padding: 20px;
+        &-func {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        &-close {
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            transition: .3s;
+            &:hover {
+                color: rgb(201, 146, 46);
+            }
+        }
+        &-info {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        &-title {
+            color: white;
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        &-list {
+            width: 100%;
+        }
+        &-item {
+            width: 100%;
+            text-align: center;
+            transition: .3s;
+            cursor: pointer;
+            &:hover {
+                background: white;
+                & a {
+                    color: black;
+                }
+            }
+        }
+        &-link {
+            color: white;
+            transition: .3s;
+            font-size: 20px;       
         }
     }
 }

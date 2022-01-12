@@ -7,19 +7,43 @@
             <span class="header__nav-span">{{ $t('info.logo') }}</span>
          </router-link>
          <div class="header__more">
-               <router-link :to="$i18nRoute({ name: 'Login' })" class="header__nav-btn">
-                  {{ $t('info.login') }}
-               </router-link>
+            <router-link :to="$i18nRoute({ name: 'Login' })" class="header__nav-btn">
+               {{ $t('info.login') }}
+            </router-link>
             <div class="header__change" @click="changeLang">
                <img 
                   :src="getImgUrl($i18n.locale)"
                   style="width: 86%; height: 86%; object-fit: cover"
                   alt="" class="header__change-img">
             </div>
+            <div class="header__nav-menu" @click="showSide = true">
+               <i class="fas fa-bars"></i>
             </div>
+         </div>
       </nav>
     </div>
   </header>
+  <transition name="side">
+      <div class="header__side" v-show="showSide">
+            <div class="header__side-func">
+               <router-link :to="$i18nRoute({ name: 'Home' })" class="header__nav-logo">
+                  <i class="fas fa-film header__nav-icon"></i>
+                  <span class="header__nav-span">{{ $t('info.logo') }}</span>
+               </router-link>
+               <i class="fas fa-times header__side-close"  @click="showSide = false"></i>
+            </div>
+            <div class="header__side-info">
+               <h2 class="header__side-title">
+                  {{ $t('info.WhatAreYouLoking') }}
+               </h2>
+               <ul class="header__side-list">
+                  <li class="header__side-item">
+                     <router-link to="/" class="header__side-link"> Мултфильмы </router-link>
+                  </li>
+               </ul>
+            </div>
+      </div>
+  </transition>
 </template>
 
 <script>
@@ -29,7 +53,8 @@ export default {
    data() {
       return {
          prevScrollPos: 0,
-         currentScrollPos: 0
+         currentScrollPos: 0,
+         showSide: false
       }
    },
    methods: {

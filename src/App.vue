@@ -59,6 +59,16 @@ html {
   opacity: 0;
 }
 
+.side-enter-active,
+.side-leave-active {
+  transition: all 0.5s;
+}
+
+.side-enter-from,
+.side-leave-to {
+  transform: translateX(100%);
+}
+
 ::-webkit-scrollbar {
   width: 3px;
   background: #000;

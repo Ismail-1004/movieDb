@@ -1,0 +1,21 @@
+{
+  "info": {
+    "logo": "MovieDb",
+    "top": "Top",
+    "login": "Login",
+    "search": "Search...",
+    "more": "More details",
+    "signin": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "dontHave": "You don't have an account?",
+    "view": "View in a new window",
+    "release": "Release date:",
+    "name": "Name",
+    "registration": "Registration",
+    "haveAcc": " You have an account?",
+    "users": "User ratings",
+    "descr": "description",
+    "posters": "Posters"
+  }
+}

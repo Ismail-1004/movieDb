@@ -1,0 +1,226 @@
+.movie {
+    padding: 60px 0;
+    &__content {
+        position: relative;
+        padding: 25px;
+        background: linear-gradient(to right, black, rgba(0, 0, 0, 0.521));
+        &-content {
+            display: flex;
+            align-items: center;
+        }
+        &-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        &-item {
+            position: relative;
+            display: inline-block;
+            border-radius: 6px;
+            &:hover .movie__content-watch {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        &-img {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
+        &-watch {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            border-radius: 6px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.521);
+            backdrop-filter: blur(15px);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s;
+        }
+        &-show {
+            font-size: 15px;
+            font-weight: 100px;
+            & i {
+                margin-right: 10px;
+            }
+        }
+        &-info {
+            padding-left: 40px;
+        }
+        &-title {
+            font-size: 35px;
+            color: white;
+        }
+        &-date {
+            font-size: 20px;
+            color: white;
+            display: flex;
+            gap: 50px;
+            margin-top: 10px;
+        }
+        &-rating {
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        &-ratingLine {
+            background: #171717;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        &-users {
+            color: white;
+            font-weight: 400;
+            font-size: 14px;
+            margin-left: 14px;
+        }
+        &-tagline {
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+        &-infos {
+            margin-top: 20px;
+        }
+        &-descrText {
+            max-width: 800px;
+            color: white;
+            margin-top: 20px;
+        }
+        &-description {
+            color: white;
+            font-weight: 400;
+            font-size: 20px;
+        }
+        &-ratingInfo {
+            border: 2px solid green;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &-scroll {
+            width: 800px;
+            height: 200px;
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        &-modal {
+            z-index: 5;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 900px;
+            background: #171717b4;
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        &-image {
+            & img {
+                border-radius: 6px;
+            }
+        }
+        &-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 25px;
+            color: white;
+            cursor: pointer;
+            transition: .3s;
+            &:hover {
+                color: rgb(201, 146, 46);
+            }
+        }
+        &-overlay {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.767);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10001;
+        }
+        &-scroll {
+            margin-top: 30px;
+        }
+        &-relative {
+            position: relative;
+        }
+        &-posters {
+            margin-top: 20px;
+            font-size: 30px;
+            color: white;
+            font-weight: 400;
+        }
+    }
+    &__wrapper {
+        &-grayscale {
+            width: 150px;
+            height: 100%;
+            cursor: pointer;
+            filter: grayscale(100);
+            transition: .3s;
+            &:hover {
+                filter: grayscale(0);
+            }
+        }
+        &-img {
+            border-radius: 15px;
+        }
+    }
+    &__controller {
+        position: absolute;
+        width: 60px;
+        height: 100%;
+        backdrop-filter: blur(8px);
+        transition: all .4s ease;
+        text-align: center;
+        font-size: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        &:hover {
+            background: rgba(148, 148, 231, 0.322);
+        }
+        &.right {
+            top: 0;
+            right: 0;
+        }
+        &.left {
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+.active__modal {
+    filter: grayscale(100%);
+}

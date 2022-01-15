@@ -93,10 +93,12 @@ export default {
     ...mapMutations(['showSide','closeSide','goBack']),
     showTopReated() {
       setTimeout(() => this.topReated(), 1000);
+      this.closeSide()
     },
 
     showNowPlaying() {
       setTimeout(() => this.getNowPlaying(), 1000);
+      this.closeSide()
     },
     scrollHeader() {
       this.currentScrollPos = window.pageYOffset;

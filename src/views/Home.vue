@@ -11,7 +11,7 @@
         <transition-group name="fade" tag="div" class="main__movies-content">
           <div
             class="main__movies-item"
-            v-for="(item, index) of getFilms"
+            v-for="(item, index) of filterMovies"
             :key="index"
             v-show="getShowMovie"
           >
@@ -64,11 +64,8 @@ export default {
   name: "Home",
   data() {
     return {
-      arraOfFilms: [],
-      page: 1,
-      showUp: true,
       search: "",
-      noMovies: false,
+      showUp: true,
     };
   },
   methods: {
@@ -78,12 +75,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getFilms', 'getPrelouder', 'getShowMovie'])
-    // filterMovies () {
-    //   return this.arraOfFilms.filter(movie => {
-    //     return (movie.title.toLowerCase().indexOf(this.search) !== -1)
-    //   })
-    // }
+    ...mapGetters(['getFilms', 'getPrelouder', 'getShowMovie']),
+    filterMovies () {
+      return this.getFilms.filter(movie => {
+        return (movie.title.toLowerCase().indexOf(this.search) !== -1)
+      })
+    }
   },
   mounted() {
     if (this.getPrelouder === true) {

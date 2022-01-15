@@ -3,11 +3,9 @@
     rel="stylesheet"
     href="https://pro.fontawesome.com/releases/v5.15.2/css/all.css"
   />
-  <transition name="fade">
     <component :is="layout">
       <router-view />
     </component>
-   </transition>
 </template>
 
 <script>

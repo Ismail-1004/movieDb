@@ -71,6 +71,15 @@
               {{ $t('info.TopReated') }}
             </router-link>
           </li>
+          <li class="header__side-item" @click="goBack">
+            <router-link
+              to="/"
+              class="header__side-link"
+              @click="showUpcoming"
+            >
+            {{ $t('info.upcoming') }}
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -89,7 +98,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["topReated",'getNowPlaying']),
+    ...mapActions(["topReated",'getNowPlaying','upcoming']),
     ...mapMutations(['showSide','closeSide','goBack']),
     showTopReated() {
       setTimeout(() => this.topReated(), 1000);
@@ -98,6 +107,11 @@ export default {
 
     showNowPlaying() {
       setTimeout(() => this.getNowPlaying(), 1000);
+      this.closeSide()
+    },
+
+    showUpcoming() {
+      setTimeout(() => this.upcoming(), 1000);
       this.closeSide()
     },
     scrollHeader() {

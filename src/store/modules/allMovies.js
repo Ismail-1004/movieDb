@@ -3,7 +3,8 @@ export default {
         allMovies: [],
         page: 1,
         showPrelouder: true,
-        showMovie: false
+        showMovie: false,
+        search: ''
     },
     mutations: {
         films(state, film) {
@@ -35,6 +36,15 @@ export default {
                     setTimeout(() => state.showPrelouder = false, 1000)
                     setTimeout(() => state.showMovie = true, 1000)
                 })
+        },
+        async upcoming ({commit, state}, page = 2) {
+            await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US&page=${page}`) 
+                .then(response => response.json())
+                .then(data => {
+                    commit('films', data['results'])
+                    setTimeout(() => state.showPrelouder = false, 1000)
+                    setTimeout(() => state.showMovie = true, 1000)
+                })
         }
     },
     getters: {
@@ -46,7 +56,10 @@ export default {
         },
         getShowMovie (state) {
             return state.showMovie
-        }
+        },
+        getSearch (state) {
+            return state.search
+        },
     }
 }
 

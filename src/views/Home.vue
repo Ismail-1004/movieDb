@@ -13,7 +13,7 @@
             class="main__movies-item"
             v-for="(item, index) of getFilms"
             :key="index"
-            v-show="shoMovie"
+            v-show="getShowMovie"
           >
             <img
               :src="`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`"
@@ -45,7 +45,7 @@
             </div>
           </div>
         </transition-group>
-        <div class="main__movies-preloader" v-show="showPreloader">
+        <div class="main__movies-preloader" v-show="getPrelouder">
           <div class="main__movies-element"></div>
         </div>
       </div>
@@ -64,9 +64,7 @@ export default {
   name: "Home",
   data() {
     return {
-      shoMovie: false,
       arraOfFilms: [],
-      showPreloader: true,
       page: 1,
       showUp: true,
       search: "",
@@ -74,33 +72,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getAllMovies']),
-    // async getAllMovies() {
-    //   const response = await fetch(
-    //     `https://api.themoviedb.org/3/movie/now_playing?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US-US&page=${this.page}`
-    //   );
-    //   const data = await response.json();
-      
-    //   if (this.arraOfFilms.length) {
-    //     this.showPagination = true;
-    //   }
-
-    //   if (this.arraOfFilms.length != 40) {
-    //     this.arraOfFilms.push(...data["results"]);
-    //   }
-    // },
-    // async getTopReated () {
-    //   const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US&page=${this.page}`)
-    //   const data = await response.json()
-
-    //   console.log(data);
-    // },
+    ...mapActions(['getNowPlaying']),
     scrollUp () {
       scrollTo(0,0)
     }
   },
   computed: {
-    ...mapGetters(['getFilms']),
+    ...mapGetters(['getFilms', 'getPrelouder', 'getShowMovie'])
     // filterMovies () {
     //   return this.arraOfFilms.filter(movie => {
     //     return (movie.title.toLowerCase().indexOf(this.search) !== -1)
@@ -108,10 +86,9 @@ export default {
     // }
   },
   mounted() {
-    if (this.showPreloader === true) {
-      setTimeout(() => this.shoMovie = true, 1000),
-      this.getAllMovies()
-      setTimeout(() => (this.showPreloader = false), 1000);
+    if (this.getPrelouder === true) {
+      this.getShowMovie
+      this.getNowPlaying()
     }
   },
   created() {
@@ -126,11 +103,11 @@ export default {
         this.showUp = true
       }
 
-      if (this.page >= 2) {
+      if (this.$store.state.page >= 2) {
         return
       } else if (scrollTop + clientHeight >= scrollHeight - 100) {
-        this.page++;
-        // this.getAllMovies();
+        this.$store.state.page++
+        // this.$store.dispatch('getAllMovies')
       } 
     });
   },

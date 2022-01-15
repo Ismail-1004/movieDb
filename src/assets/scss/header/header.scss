@@ -138,6 +138,9 @@
             text-align: center;
             transition: .3s;
             cursor: pointer;
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
             &:hover {
                 background: white;
                 & a {

@@ -5,11 +5,13 @@
         <router-link
           :to="$i18nRoute({ name: 'Home' })"
           class="header__nav-logo"
+          @click="goBack"
         >
           <i class="fas fa-film header__nav-icon"></i>
           <span class="header__nav-span">{{ $t("info.logo") }}</span>
         </router-link>
         <div class="header__more">
+          
           <router-link
             :to="$i18nRoute({ name: 'Login' })"
             class="header__nav-btn"
@@ -24,7 +26,7 @@
               class="header__change-img"
             />
           </div>
-          <div class="header__nav-menu" @click="showSide = true">
+          <div class="header__nav-menu" @click="showSide">
             <i class="fas fa-bars"></i>
           </div>
         </div>
@@ -32,7 +34,7 @@
     </div>
   </header>
   <transition name="side">
-    <div class="header__side" v-show="showSide">
+    <div class="header__side" v-show="getShow">
       <div class="header__side-func">
         <router-link
           :to="$i18nRoute({ name: 'Home' })"
@@ -43,7 +45,7 @@
         </router-link>
         <i
           class="fas fa-times header__side-close"
-          @click="showSide = false"
+          @click="closeSide"
         ></i>
       </div>
       <div class="header__side-info">
@@ -51,39 +53,50 @@
           {{ $t("info.WhatAreYouLoking") }}
         </h2>
         <ul class="header__side-list">
-          <li class="header__side-item">
+          <li class="header__side-item" @click="goBack">
+            <router-link
+              to="/"
+              class="header__side-link"
+              @click="showNowPlaying"
+            >
+              {{ $t('info.ViewedNow') }}
+            </router-link>
+          </li>
+          <li class="header__side-item" @click="goBack">
             <router-link
               to="/"
               class="header__side-link"
               @click="showTopReated"
             >
-              Мултфильмы
+              {{ $t('info.TopReated') }}
             </router-link>
           </li>
         </ul>
-      </div>``
+      </div>
     </div>
   </transition>
 </template>
 
 <script>
 import { SUPPORT_LOCALES } from "@/i18n";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       prevScrollPos: 0,
       currentScrollPos: 0,
-      showSide: false,
-      showPreloader: true,
     };
   },
   methods: {
-    ...mapActions(["topReated"]),
+    ...mapActions(["topReated",'getNowPlaying']),
+    ...mapMutations(['showSide','closeSide','goBack']),
     showTopReated() {
       setTimeout(() => this.topReated(), 1000);
-      setTimeout(() => this.showPreloader = false, 1000);
+    },
+
+    showNowPlaying() {
+      setTimeout(() => this.getNowPlaying(), 1000);
     },
     scrollHeader() {
       this.currentScrollPos = window.pageYOffset;
@@ -113,12 +126,12 @@ export default {
           });
 
           this.$router.push(to.path);
-
           return;
         }
       }
     },
   },
+  computed: mapGetters(['getShow']),
   created() {
     window.addEventListener("scroll", this.scrollHeader);
   },

@@ -11,8 +11,9 @@
         <transition-group name="fade" tag="div" class="main__movies-content">
           <div
             class="main__movies-item"
-            v-for="(item, index) of filterMovies"
+            v-for="(item, index) of getFilms"
             :key="index"
+            v-show="shoMovie"
           >
             <img
               :src="`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`"
@@ -56,10 +57,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Home",
   data() {
     return {
+      shoMovie: false,
       arraOfFilms: [],
       showPreloader: true,
       page: 1,
@@ -69,34 +74,43 @@ export default {
     };
   },
   methods: {
-    async getAllMovies() {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US-US&page=${this.page}`
-      );
-      const data = await response.json();
+    ...mapActions(['getAllMovies']),
+    // async getAllMovies() {
+    //   const response = await fetch(
+    //     `https://api.themoviedb.org/3/movie/now_playing?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US-US&page=${this.page}`
+    //   );
+    //   const data = await response.json();
       
-      if (this.arraOfFilms.length) {
-        this.showPagination = true;
-      }
+    //   if (this.arraOfFilms.length) {
+    //     this.showPagination = true;
+    //   }
 
-      if (this.arraOfFilms.length != 40) {
-        this.arraOfFilms.push(...data["results"]);
-      }
-    },
+    //   if (this.arraOfFilms.length != 40) {
+    //     this.arraOfFilms.push(...data["results"]);
+    //   }
+    // },
+    // async getTopReated () {
+    //   const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=259c54c53e1db75ca5c5abe2e40a02d0&language=en-US&page=${this.page}`)
+    //   const data = await response.json()
+
+    //   console.log(data);
+    // },
     scrollUp () {
       scrollTo(0,0)
     }
   },
   computed: {
-    filterMovies () {
-      return this.arraOfFilms.filter(movie => {
-        return (movie.title.toLowerCase().indexOf(this.search) !== -1)
-      })
-    }
+    ...mapGetters(['getFilms']),
+    // filterMovies () {
+    //   return this.arraOfFilms.filter(movie => {
+    //     return (movie.title.toLowerCase().indexOf(this.search) !== -1)
+    //   })
+    // }
   },
   mounted() {
     if (this.showPreloader === true) {
-      setTimeout(() => this.getAllMovies(), 1000);
+      setTimeout(() => this.shoMovie = true, 1000),
+      this.getAllMovies()
       setTimeout(() => (this.showPreloader = false), 1000);
     }
   },
@@ -106,16 +120,18 @@ export default {
       let scrollHeight = document.documentElement.scrollHeight;
       let clientHeight = document.documentElement.clientHeight;
 
-      if (scrollTop + clientHeight >= scrollHeight - 100) {
-        this.page++;
-        this.getAllMovies();
-      }
-
       if (scrollTop > 700) {
         this.showUp = false
       } else {
         this.showUp = true
       }
+
+      if (this.page >= 2) {
+        return
+      } else if (scrollTop + clientHeight >= scrollHeight - 100) {
+        this.page++;
+        // this.getAllMovies();
+      } 
     });
   },
 };

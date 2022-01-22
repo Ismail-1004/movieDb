@@ -1,6 +1,6 @@
 <template>
   <header class="header__auth">
-    <router-link :to="$i18nRoute({ name: 'Home' })" class="header__auth-logo">
+    <router-link :to="$i18nRoute({ name: 'Home' })" class="header__auth-logo" @click="goBack">
       <i class="fas fa-film header__nav-icon"></i>
       <span class="header__nav-span">MovieDB</span>
     </router-link>
@@ -17,9 +17,11 @@
 
 <script>
 import { SUPPORT_LOCALES } from "@/i18n";
+import { mapMutations } from 'vuex'
 
 export default {
   methods: {
+    ...mapMutations(['goBack']),
     scrollHeader() {
       this.currentScrollPos = window.pageYOffset;
       if (this.prevScrollPos > this.currentScrollPos) {

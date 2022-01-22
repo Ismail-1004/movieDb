@@ -66,6 +66,7 @@ export default {
     return {
       search: "",
       showUp: true,
+      page: 1
     };
   },
   methods: {
@@ -104,7 +105,7 @@ export default {
         return
       } else if (scrollTop + clientHeight >= scrollHeight - 100) {
         this.$store.state.page++
-        // this.$store.dispatch('getAllMovies')
+        this.$store.dispatch('getAllMovies')
       } 
     });
   },

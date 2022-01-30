@@ -1,11 +1,16 @@
 <template>
-  <main class="main" >
+  <main class="main">
     <section class="main__movies">
       <div class="container">
         <div class="main__movies-infoo">
-          <h2 class="main__movies-title">MovieDb {{ $t('info.top') }} 250</h2>
+          <h2 class="main__movies-title">MovieDb {{ $t("info.top") }} 250</h2>
           <form class="header__nav-form">
-            <input type="text" class="header__nav-input" :placeholder="$t('info.search')" v-model="search">
+            <input
+              type="text"
+              class="header__nav-input"
+              :placeholder="$t('info.search')"
+              v-model="search"
+            />
           </form>
         </div>
         <transition-group name="fade" tag="div" class="main__movies-content">
@@ -36,10 +41,10 @@
                   :to="$i18nRoute({ name: 'Movie', params: { id: item.id } })"
                   class="main__movies-btn"
                 >
-                  {{ $t('info.more') }}
+                  {{ $t("info.more") }}
                 </router-link>
                 <h4 class="main__movies-rating" ref="average">
-                  <span > {{ item.vote_average }} </span>
+                  <span> {{ item.vote_average }} </span>
                 </h4>
               </div>
             </div>
@@ -50,15 +55,19 @@
         </div>
       </div>
     </section>
-    <div class="main__arrow" :class="{ active__arrow: showUp}" @click="scrollUp" >
+    <div
+      class="main__arrow"
+      :class="{ active__arrow: showUp }"
+      @click="scrollUp"
+    >
       <i class="fas fa-chevron-up"></i>
     </div>
   </main>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { mapGetters } from 'vuex'
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -66,47 +75,38 @@ export default {
     return {
       search: "",
       showUp: true,
-      page: 1
+      page: 1,
     };
   },
   methods: {
-    ...mapActions(['getNowPlaying']),
-    scrollUp () {
-      scrollTo(0,0)
-    }
+    ...mapActions(["getNowPlaying"]),
+    scrollUp() {
+      scrollTo(0, 0);
+    },
   },
   computed: {
-    ...mapGetters(['getFilms', 'getPrelouder', 'getShowMovie']),
-    filterMovies () {
-      return this.getFilms.filter(movie => {
-        return (movie.title.toLowerCase().indexOf(this.search) !== -1)
-      })
-    }
+    ...mapGetters(["getFilms", "getPrelouder", "getShowMovie"]),
+    filterMovies() {
+      return this.getFilms.filter((movie) => {
+        return movie.title.toLowerCase().indexOf(this.search) !== -1;
+      });
+    },
   },
   mounted() {
     if (this.getPrelouder === true) {
-      this.getShowMovie
-      this.getNowPlaying()
+      this.getShowMovie;
+      this.getNowPlaying();
     }
   },
   created() {
     window.addEventListener("scroll", () => {
       let scrollTop = document.documentElement.scrollTop;
-      let scrollHeight = document.documentElement.scrollHeight;
-      let clientHeight = document.documentElement.clientHeight;
 
       if (scrollTop > 700) {
-        this.showUp = false
+        this.showUp = false;
       } else {
-        this.showUp = true
+        this.showUp = true;
       }
-
-      if (this.$store.state.page >= 2) {
-        return
-      } else if (scrollTop + clientHeight >= scrollHeight - 100) {
-        this.$store.state.page++
-        this.$store.dispatch('getAllMovies')
-      } 
     });
   },
 };

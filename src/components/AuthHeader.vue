@@ -1,6 +1,6 @@
 <template>
   <header class="header__auth">
-    <router-link :to="$i18nRoute({ name: 'Home' })" class="header__auth-logo" @click="goBack">
+    <router-link :to="$i18nRoute({ name: '' })" class="header__auth-logo" @click="goBack">
       <i class="fas fa-film header__nav-icon"></i>
       <span class="header__nav-span">MovieDB</span>
     </router-link>
@@ -12,14 +12,24 @@
         class="header__change-img"
       />
     </div>
+    <transition name="fade" class="header__auth-error" v-show="showError">
+      <span v-show="showError"> {{ errorMesage }}</span>
+    </transition>
   </header>
 </template>
 
 <script>
 import { SUPPORT_LOCALES } from "@/i18n";
 import { mapMutations } from 'vuex'
+import messages from '@/utils/messages'
 
 export default {
+  data() {
+    return {
+      errorMesage: '',
+      showError: false
+    }
+  },
   methods: {
     ...mapMutations(['goBack']),
     scrollHeader() {
@@ -55,6 +65,22 @@ export default {
         }
       }
     },
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error (fbError) {
+      if (fbError) {
+        this.errorMesage = messages[fbError.code] || 'Что-то пошло не так'
+        this.showError = true
+        setTimeout(() => {
+           this.showError = false
+        },1500)
+      }
+    }
   }
 };
 </script>

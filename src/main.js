@@ -17,7 +17,7 @@ const i18nRoute = (to) => {
         ...to,
         params: {
             locale: i18n.global.locale,
-            ...to.params
+            ...to.params 
         }
     }
 }

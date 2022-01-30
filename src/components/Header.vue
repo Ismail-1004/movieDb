@@ -55,7 +55,7 @@
         <ul class="header__side-list">
           <li class="header__side-item" @click="goBack">
             <router-link
-              to="/"
+              :to="$i18nRoute({ name: 'Home' })"
               class="header__side-link"
               @click="showNowPlaying"
             >
@@ -64,7 +64,7 @@
           </li>
           <li class="header__side-item" @click="goBack">
             <router-link
-              to="/"
+               :to="$i18nRoute({ name: 'Home' })"
               class="header__side-link"
               @click="showTopReated"
             >
@@ -73,11 +73,20 @@
           </li>
           <li class="header__side-item" @click="goBack">
             <router-link
-              to="/"
+               :to="$i18nRoute({ name: 'Home' })"
               class="header__side-link"
               @click="showUpcoming"
             >
             {{ $t('info.upcoming') }}
+            </router-link>
+          </li>
+          <li class="header__side-item" @click="goBack">
+            <router-link
+               :to="$i18nRoute({ name: 'Home' })"
+              class="header__side-link"
+              @click="showGetPopular"
+            >
+            {{ $t('info.popular') }}
             </router-link>
           </li>
         </ul>
@@ -98,7 +107,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["topReated",'getNowPlaying','upcoming']),
+    ...mapActions(["topReated",'getNowPlaying','upcoming','getPopular']),
     ...mapMutations(['showSide','closeSide','goBack']),
     showTopReated() {
       setTimeout(() => this.topReated(), 1000);
@@ -112,6 +121,11 @@ export default {
 
     showUpcoming() {
       setTimeout(() => this.upcoming(), 1000);
+      this.closeSide()
+    },
+
+    showGetPopular() {
+      setTimeout(() => this.getPopular(), 1000);
       this.closeSide()
     },
     scrollHeader() {

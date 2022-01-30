@@ -40,13 +40,13 @@ export default {
             }
             try {
                 await this.$store.dispatch('login', formData)
-                this.$router.push('/')
+                this.$router.push(this.$i18nRoute({ name: 'Home' }))
             } catch (e) {}
         },
         async logout () {
             await this.$store.dispatch('logout')
             this.$router.push('/registration')
         }
-    }
+    },
 }
 </script>

@@ -13,13 +13,13 @@ const routes = [{
   },
   children: [
     {
-      path: '',
+      path: 'movies',
       name: 'Home',
       meta: {layout: 'main'},
       component: Home
     },
     {
-      path: 'login',
+      path: '',
       name: 'Login',
       meta: {layout: 'empty'},
       component: load('Login')

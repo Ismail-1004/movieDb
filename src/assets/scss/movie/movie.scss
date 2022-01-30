@@ -7,6 +7,9 @@
         &-content {
             display: flex;
             align-items: center;
+            @media (max-width: 1270px) {
+                flex-direction: column;
+            }
         }
         &-bg {
             position: absolute;
@@ -58,10 +61,23 @@
         }
         &-info {
             padding-left: 40px;
+            @media (max-width: 1270px) {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-left: 0;
+            }
         }
         &-title {
             font-size: 35px;
             color: white;
+            @media (max-width: 620px) {
+                font-size: 25px;
+                margin-bottom: 20px;
+                text-align: center;
+                line-height: 40px;
+            }
         }
         &-date {
             font-size: 20px;
@@ -69,6 +85,11 @@
             display: flex;
             gap: 50px;
             margin-top: 10px;
+            @media (max-width: 620px) {
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
         }
         &-rating {
             cursor: pointer;
@@ -106,6 +127,11 @@
             text-align: justify;
             color: white;
             margin-top: 20px;
+            @media (max-width: 460px) {
+                max-width: 100%;
+                text-align: center;
+                line-height: 25px;
+            }
         }
         &-description {
             color: white;
@@ -169,15 +195,22 @@
         }
         &-scroll {
             margin-top: 30px;
+            
         }
         &-relative {
             position: relative;
+            @media (max-width: 862px) {
+                display: none;
+            }
         }
         &-posters {
             margin-top: 20px;
             font-size: 30px;
             color: white;
             font-weight: 400;
+            @media (max-width: 862px) {
+                display: none;
+            }
         }
     }
     &__wrapper {

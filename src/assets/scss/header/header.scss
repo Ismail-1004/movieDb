@@ -1,3 +1,22 @@
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    @media (max-width: 1200px) {
+        max-width: 768px;
+    }
+    @media (max-width: 797px) {
+        max-width: 576px;
+    }
+    @media (max-width: 601px) {
+        max-width: 376px;
+    }
+    @media (max-width: 401px) {
+        max-width: 310px;
+    }
+  }
+
 ::-webkit-input-placeholder {
     color: white;
  }
@@ -58,6 +77,9 @@
         &-form {
             position: relative;
             width: 500px;
+            @media (max-width: 601px) {
+                width: 100%;
+            }
         }
         &-input {
             padding: 5px;
@@ -71,6 +93,9 @@
             &:focus {
                 outline: none;
             }
+            @media (max-width: 601px) {
+               width: 100%;
+            }
         }
         &-btn {
             padding: 5px;
@@ -79,6 +104,9 @@
             color: white;
             cursor: pointer;
             transition: .3s;
+            @media (max-width: 400px) {
+                display: none;
+            }
             &:hover {
                 color: rgb(201, 146, 46);
             }

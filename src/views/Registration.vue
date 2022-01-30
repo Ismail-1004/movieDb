@@ -38,14 +38,13 @@ export default {
     },
     methods: {
         async registrationHeandler () {
-
             try {
                 await this.$store.dispatch('register', {
                     email: this.email,
                     password: this.password,
                     name: this.name
                 })
-                this.$router.push('/')
+                this.$router.push(this.$i18nRoute({ name: 'Login' }))
             } catch (e) {}
 
         }

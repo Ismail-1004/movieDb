@@ -42,13 +42,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;

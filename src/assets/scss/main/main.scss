@@ -175,6 +175,34 @@
             color: black;
             font-size: 20px;
         }
+        &-searched {
+            background: rgba(83, 66, 66, 0.877);
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            top: 30px;
+            right: 5px;
+            border-radius: 6px;
+            z-index: 9999;
+            backdrop-filter: blur(15px);
+            padding: 10px 15px;
+            overflow-y: scroll;
+        }
+        &-searchedItem {
+            max-width: 100%;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+        &-searchImg {
+            max-width: 80px;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+        &-searchedTitile {
+            color: white;
+            font-weight: 400;
+        }
     }
     &__arrow {
         font-size: 30px;

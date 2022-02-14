@@ -10,13 +10,24 @@
               class="header__nav-input"
               :placeholder="$t('info.search')"
               v-model="search"
+              @input="serchedFilm"
             />
+            <transition-group tag="div" name="fade" class="main__movies-searched" v-show="showSearch">
+              <router-link :to="$i18nRoute({ name: 'Movie', params: { id: item.id } })" class="main__movies-searchedItem" v-for="(item,index) in filterMovies" :key="index">
+                <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`" class="main__movies-searchImg" alt="">
+                <div>
+                  <h3 class="main__movies-searchedTitile">
+                    {{ item.title }}
+                  </h3>
+                </div>
+              </router-link>
+            </transition-group>
           </form>
         </div>
         <transition-group name="fade" tag="div" class="main__movies-content">
           <div
             class="main__movies-item"
-            v-for="(item, index) of filterMovies"
+            v-for="(item, index) of getFilms"
             :key="index"
             v-show="getShowMovie"
           >
@@ -76,6 +87,7 @@ export default {
       search: "",
       showUp: true,
       page: 1,
+      showSearch: false
     };
   },
   methods: {
@@ -83,6 +95,13 @@ export default {
     scrollUp() {
       scrollTo(0, 0);
     },
+    serchedFilm () {
+      if (this.search.length > 0) {
+        setTimeout(() => this.showSearch = true, 200)
+      } else {
+        setTimeout(() => this.showSearch = false, 100)
+      }
+    }
   },
   computed: {
     ...mapGetters(["getFilms", "getPrelouder", "getShowMovie"]),

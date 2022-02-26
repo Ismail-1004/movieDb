@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import allMovies from './modules/allMovies'
 import auth from './modules/auth'
 import headerMenu from './modules/headerMenu'
+import info from './modules/info'
 
 export default createStore({
   state: {
@@ -23,6 +24,7 @@ export default createStore({
   modules: {
     allMovies,
     auth,
-    headerMenu
+    headerMenu,
+    info
   }
 })

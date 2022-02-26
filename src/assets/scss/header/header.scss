@@ -36,6 +36,45 @@
     &__more {
         display: flex;
         align-items: center;
+        &-info {
+            position: relative;
+            &:hover {
+                .header__more-signOut {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+        &-name {
+            padding: 5px;
+            background: rgba(179, 152, 152, 0.288);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover {
+                color: orange;
+            }
+        }
+        &-signOut {
+            position: absolute;
+            top: 30px;
+            left: -40%;
+            padding: 5px;
+            background: rgba(179, 152, 152, 0.288);
+            backdrop-filter: blur(15px);
+            min-width: 80px;
+            text-align: center;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            &:hover {
+                color: orange;
+            }
+        }
     }
     &__change {
         height: 35px;

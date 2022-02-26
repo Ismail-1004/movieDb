@@ -11,13 +11,22 @@
           <span class="header__nav-span">{{ $t("info.logo") }}</span>
         </router-link>
         <div class="header__more">
-          
           <router-link
             :to="$i18nRoute({ name: 'Login' })"
             class="header__nav-btn"
+            v-show="showLogin"
           >
             {{ $t("info.login") }}
           </router-link>
+          <!-- info -->
+          <div class="header__more-info" v-show="showUser">
+            <span class="header__more-name">
+              {{ name }}
+            </span>
+            <router-link to="/" class="header__more-signOut" @click="logout">
+              <span @click="signOut"> Sign out </span>
+            </router-link>
+          </div>
           <div class="header__change" @click="changeLang">
             <img
               :src="getImgUrl($i18n.locale)"
@@ -107,8 +116,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["topReated",'getNowPlaying','upcoming','getPopular']),
-    ...mapMutations(['showSide','closeSide','goBack']),
+    ...mapActions(["topReated",'getNowPlaying','upcoming','getPopular','logout']),
+    ...mapMutations(['showSide','closeSide','goBack','signOut']),
     showTopReated() {
       setTimeout(() => this.topReated(), 1000);
       this.closeSide()
@@ -161,7 +170,12 @@ export default {
       }
     },
   },
-  computed: mapGetters(['getShow']),
+  computed: {
+    ...mapGetters(['getShow','showLogin','showUser']),
+    name () {
+      return this.$store.getters.info.name
+    }
+  },
   created() {
     window.addEventListener("scroll", this.scrollHeader);
   },
